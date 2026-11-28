@@ -28,6 +28,14 @@ Build for production:
 npm run build && npm run preview
 ```
 
+## Deploy (GitHub Pages)
+
+Pushing to `main` runs `.github/workflows/deploy.yml`, which builds the site and publishes `dist/` to GitHub Pages. In the repository settings, set **Pages → Build and deployment → Source** to **GitHub Actions**.
+
+The production build is served from `https://<user>.github.io/physics/`, so `vite.config.ts` sets `base: "/physics/"` for production and `/` for development. If the repository is ever renamed, update that base path.
+
+Live site: <https://shehankanchana12-art.github.io/physics/>
+
 ## Structure
 
 ```

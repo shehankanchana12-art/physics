@@ -7,11 +7,14 @@ const extraHosts = (
   globalThis as { process?: { env: Record<string, string | undefined> } }
 ).process?.env.__VITE_ADDITIONAL_SERVER_ALLOWED_HOSTS?.split(",").filter(Boolean);
 
-export default defineConfig({
+// GitHub Pages serves project sites from https://<user>.github.io/<repo>/, so the
+// production build needs that sub-path while local development stays at the root.
+export default defineConfig(({ mode }) => ({
+  base: mode === "production" ? "/physics/" : "/",
   plugins: [react()],
   server: {
     host: "0.0.0.0",
     port: 3000,
     allowedHosts: extraHosts?.length ? extraHosts : undefined,
   },
-});
+}));
